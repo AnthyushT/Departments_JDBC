@@ -18,9 +18,8 @@ public class Departments {
             if (conn != null) {
                 System.out.println("Connection is Successful.");
             }
-            assert conn != null;
-            Statement stmt = conn.createStatement();
-            stmt.execute(CREATE);
+            PreparedStatement preparedStatement = conn.prepareStatement(CREATE);
+            preparedStatement.execute();
             System.out.println("Table created");
             Scanner sc = new Scanner(System.in);
             int choice;
@@ -103,8 +102,8 @@ public class Departments {
                         rowsModified = rowsDeleted;
                         break;
                     case 4:
-                        Statement selectStatement = conn.createStatement();
-                        ResultSet resultSet = selectStatement.executeQuery(SELECTQUERY);
+                        PreparedStatement selectStatement = conn.prepareStatement(SELECTQUERY);
+                        ResultSet resultSet = selectStatement.executeQuery();
                         System.out.println("Department Table:");
                         if (!resultSet.isBeforeFirst()) {
                             System.out.println("No data in the table.");
